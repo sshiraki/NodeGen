@@ -22,6 +22,13 @@ struct Graph{
         case invalidJsonError
     }
     
+//    static func getNode(nodes: [Node], latitude: CLLocationDegrees, longitude: CLLocationDegrees) -> Node {
+//        let node = Node(location: CLLocationCoordinate2DMake(latitude, longitude), edges: [])
+//        if let index = nodes.index(of:node) {
+//            return nodes[index]
+//        }
+//    }
+    
     init() throws {
         guard let jsonData =  Graph.getJsonData() else {
             throw GraphError.invalidJsonError

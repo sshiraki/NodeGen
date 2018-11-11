@@ -15,6 +15,8 @@ class ViewController: UIViewController, MKMapViewDelegate {
     var graph = try! Graph()
     var scale = CGFloat(1.0)
     var mapView:MKMapView!
+    var fromNode:Node!
+    var toNode:Node!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -73,7 +75,6 @@ class ViewController: UIViewController, MKMapViewDelegate {
         } else {
             pinView?.annotation = annotation
         }
-        
         pinView?.canShowCallout = true  // タップで吹き出しを表示
         return pinView
     }
@@ -98,5 +99,31 @@ class ViewController: UIViewController, MKMapViewDelegate {
             renderer = MKPolygonRenderer(overlay:overlay)
         }
         return renderer
+    }
+    
+    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+        print("taped")
+       //処理
+    }
+
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.tapGesture(gestureRecognizer:)))
+        view.addGestureRecognizer(tapGesture)
+
+    }
+
+    @objc func tapGesture(gestureRecognizer: UITapGestureRecognizer){
+        let view = gestureRecognizer.view
+        let tapPoint = gestureRecognizer.location(in: view)
+
+        //ピン部分のタップだったらリターン
+        if tapPoint.x >= 0 && tapPoint.y >= 0 {
+            print("pin taped")
+//            toNode =
+            return
+        }
+        
+        print("pin 以外")
+        //処理
     }
 }

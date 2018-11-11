@@ -71,3 +71,10 @@ struct Node {
     }
 }
 
+extension Node: Equatable {
+    public static func == (lha:Node, rha:Node) -> Bool {
+        return lha.location.latitude == rha.location.latitude && lha.location
+        .longitude == rha.location.longitude
+    }
+}
+
