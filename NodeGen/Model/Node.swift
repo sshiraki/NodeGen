@@ -43,13 +43,14 @@ struct Node {
     
     func render(view:MKMapView, graph:Graph) {
         // 地図にピンを立てる
-        let an = MKPointAnnotation()
+        let an = NodeAnnotation()
         an.coordinate = CLLocationCoordinate2DMake(self.location.latitude, self.location.longitude)
+        an.node = self
         Metricsmk.image = Node.image
         view.addAnnotation(an)
 
         // edgeの元に円を描く
-        view.addOverlay(MKCircle(center:self.location, radius:10))
+        //view.addOverlay(MKCircle(center:self.location, radius:10))
         
         // edge間の線を引く
         

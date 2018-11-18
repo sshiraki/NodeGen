@@ -60,6 +60,7 @@ class ViewController: UIViewController, MKMapViewDelegate {
         
     }
     
+
     // ピン描画前の呼び出しメソッド
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         if annotation is MKUserLocation {   
@@ -72,6 +73,19 @@ class ViewController: UIViewController, MKMapViewDelegate {
             pinView = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
             pinView?.glyphImage = Metricsmk.image
         
+            // pinのクラス名を取得
+            switch NSStringFromClass(type(of: annotation)).components(separatedBy: ".").last! as String {
+                
+            case "NodeAnnotation":
+                
+                // ( annotation as! NodeAnnotation )
+                // NodeAnnotationクラスで定義した変数を取る
+                print((annotation as! NodeAnnotation).node!)
+                
+            default: break
+            }
+            
+            // すでにpinがカスタマイズされている場合はそのまま表示
         } else {
             pinView?.annotation = annotation
         }
@@ -109,9 +123,40 @@ class ViewController: UIViewController, MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.tapGesture(gestureRecognizer:)))
         view.addGestureRecognizer(tapGesture)
-
+        
+        toNode = fromNode
+        fromNode = (view.annotation as! NodeAnnotation).node!
+        if (toNode == nil ){ return }
+        
+        let cofrom = CLLocationCoordinate2DMake(fromNode.location.latitude,fromNode.location.longitude)
+        let coto = CLLocationCoordinate2DMake(toNode.location.latitude,toNode.location.longitude)        // 始点と終点のMKPlacemarkを生成
+        let fromPlacemark = MKPlacemark(coordinate:cofrom, addressDictionary:nil)
+        let toPlacemark   = MKPlacemark(coordinate:coto, addressDictionary:nil)
+            
+            // MKPlacemark から MKMapItem を生成
+        let fromItem = MKMapItem(placemark:fromPlacemark)
+        let toItem   = MKMapItem(placemark:toPlacemark)
+        // MKMapItem をセットして MKDirectionsRequest を生成
+        let request = MKDirections.Request()
+        request.source = fromItem
+        request.destination = toItem
+        request.requestsAlternateRoutes = false // 単独の経路を検索
+        request.transportType = MKDirectionsTransportType.any
+        // 経路検索
+        let directions = MKDirections(request:request)
+        directions.calculate(completionHandler: {
+            (response, error) in
+            
+            if error != nil {
+                print("Error :",error.debugDescription)
+            } else {
+                mapView.addOverlay((response!.routes[0].polyline))
+                print(self.fromNode.location, self.toNode.location)
+                //showRoute(view, response: response!)
+            }
+        })
     }
-
+    
     @objc func tapGesture(gestureRecognizer: UITapGestureRecognizer){
         let view = gestureRecognizer.view
         let tapPoint = gestureRecognizer.location(in: view)

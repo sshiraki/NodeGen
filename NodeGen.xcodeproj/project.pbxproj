@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9B285B3A219A3F6100E2EB52 /* NodeAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B285B39219A3F6100E2EB52 /* NodeAnnotation.swift */; };
 		9B44DCAB218E752900B1FFA1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B44DCAA218E752900B1FFA1 /* AppDelegate.swift */; };
 		9B44DCAD218E752900B1FFA1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B44DCAC218E752900B1FFA1 /* ViewController.swift */; };
 		9B44DCB0218E752900B1FFA1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B44DCAE218E752900B1FFA1 /* Main.storyboard */; };
@@ -25,6 +26,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9B285B39219A3F6100E2EB52 /* NodeAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NodeAnnotation.swift; sourceTree = "<group>"; };
 		9B44DCA7218E752900B1FFA1 /* NodeGen.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NodeGen.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B44DCAA218E752900B1FFA1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9B44DCAC218E752900B1FFA1 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -107,6 +109,7 @@
 				9B44DCCC218E772600B1FFA1 /* Edge.swift */,
 				9B44DCD3218E772600B1FFA1 /* Route.swift */,
 				9B44DCDE218E7A2A00B1FFA1 /* DIrection.swift */,
+				9B285B39219A3F6100E2EB52 /* NodeAnnotation.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -198,6 +201,7 @@
 				9B44DCF1218E8EA300B1FFA1 /* Node.swift in Sources */,
 				9B44DCEE218E8E9700B1FFA1 /* Metrics.swift in Sources */,
 				9B44DCE1218E7CC400B1FFA1 /* Graph.swift in Sources */,
+				9B285B3A219A3F6100E2EB52 /* NodeAnnotation.swift in Sources */,
 				9B44DCAB218E752900B1FFA1 /* AppDelegate.swift in Sources */,
 				9B44DCEF218E8E9A00B1FFA1 /* Metricsmk.swift in Sources */,
 				9B44DCF2218E8EA700B1FFA1 /* Edge.swift in Sources */,
