@@ -10,7 +10,7 @@ import MapKit
 
 struct Graph{
     static var verbose = false
-    private var nodes:[Node]
+    public var nodes:[Node]
     
     static func getJsonData() -> Data? {
         let file = "../map"

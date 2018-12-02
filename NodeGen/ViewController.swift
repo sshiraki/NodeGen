@@ -46,7 +46,18 @@ class ViewController: UIViewController, MKMapViewDelegate {
         
         viewMain.addSubview(mapView)
         
-    }
+        // タップのUIGestureRecognrを生成.
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.tapGesture(gestureRecognizer:)))
+        // MapViewにUIGestureRecognizerを追加.
+        view.addGestureRecognizer(tapGesture)
+        
+        // 長押しのUIGestureRecognizerを生成.
+        let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(self.longPressGesture(sender:)))
+        // MapViewにUIGestureRecognizerを追加.
+        view.addGestureRecognizer(longPressGesture)
+        longPressGesture.minimumPressDuration = 0.5
+        
+   }
     
     static func getJsonString() -> String {
         let file = "../map"
@@ -70,7 +81,10 @@ class ViewController: UIViewController, MKMapViewDelegate {
         let reuseId = "pin"
         var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId) as? MKMarkerAnnotationView
         if pinView == nil {
+
             pinView = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
+
+            
             pinView?.glyphImage = Metricsmk.image
         
             // pinのクラス名を取得
@@ -121,19 +135,17 @@ class ViewController: UIViewController, MKMapViewDelegate {
     }
 
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.tapGesture(gestureRecognizer:)))
-        view.addGestureRecognizer(tapGesture)
-        
         toNode = fromNode
         fromNode = (view.annotation as! NodeAnnotation).node!
         if (toNode == nil ){ return }
-        
+        if (fromNode == toNode ){ return }
+
         let cofrom = CLLocationCoordinate2DMake(fromNode.location.latitude,fromNode.location.longitude)
         let coto = CLLocationCoordinate2DMake(toNode.location.latitude,toNode.location.longitude)        // 始点と終点のMKPlacemarkを生成
         let fromPlacemark = MKPlacemark(coordinate:cofrom, addressDictionary:nil)
         let toPlacemark   = MKPlacemark(coordinate:coto, addressDictionary:nil)
             
-            // MKPlacemark から MKMapItem を生成
+        // MKPlacemark から MKMapItem を生成
         let fromItem = MKMapItem(placemark:fromPlacemark)
         let toItem   = MKMapItem(placemark:toPlacemark)
         // MKMapItem をセットして MKDirectionsRequest を生成
@@ -151,10 +163,16 @@ class ViewController: UIViewController, MKMapViewDelegate {
                 print("Error :",error.debugDescription)
             } else {
                 mapView.addOverlay((response!.routes[0].polyline))
-                print(self.fromNode.location, self.toNode.location)
                 //showRoute(view, response: response!)
+                // Nodeが設定されてなければ、追加
+                let edge = Edge(from: self.graph.nodes.index(of: self.fromNode)!, to: self.graph.nodes.index(of: self.toNode)!, length: response!.routes[0].distance)
+                if self.fromNode.edges.index(of: edge) == nil {
+                    self.fromNode.edges.append(edge)
+                }
+                print(self.fromNode, self.toNode)
             }
         })
+        
     }
     
     @objc func tapGesture(gestureRecognizer: UITapGestureRecognizer){
@@ -167,8 +185,29 @@ class ViewController: UIViewController, MKMapViewDelegate {
 //            toNode =
             return
         }
-        
+        self.fromNode = nil
         print("pin 以外")
         //処理
+    }
+    
+    /* 長押しを感知した際に呼ばれるメソッド. */
+    @objc func longPressGesture(sender: UILongPressGestureRecognizer) {
+        
+        // 長押しの最中に何度もピンを生成しないようにする.
+        if sender.state != UIGestureRecognizer.State.began {
+            return
+        }
+        
+        // ピンを生成
+        let myPin: MKPointAnnotation = MKPointAnnotation()
+        
+        // タイトルを設定.
+        myPin.title = "タイトル"
+ 
+        // サブタイトルを設定.
+        myPin.subtitle = "サブタイトル"
+        
+        
+        
     }
 }

@@ -44,3 +44,9 @@ extension Edge: CustomStringConvertible {
         return String(format: "%d->%d", from, to)
     }
 }
+
+extension Edge: Equatable {
+    public static func == (lha:Edge, rha:Edge) -> Bool {
+        return lha.from == rha.from && lha.to == rha.to
+    }
+}

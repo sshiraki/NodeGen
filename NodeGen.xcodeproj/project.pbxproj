@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9B18B61E21B3630600F682F2 /* default.json in Resources */ = {isa = PBXBuildFile; fileRef = 9B18B61D21B3630600F682F2 /* default.json */; };
 		9B285B3A219A3F6100E2EB52 /* NodeAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B285B39219A3F6100E2EB52 /* NodeAnnotation.swift */; };
 		9B44DCAB218E752900B1FFA1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B44DCAA218E752900B1FFA1 /* AppDelegate.swift */; };
 		9B44DCAD218E752900B1FFA1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B44DCAC218E752900B1FFA1 /* ViewController.swift */; };
@@ -26,6 +27,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9B18B61D21B3630600F682F2 /* default.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = default.json; sourceTree = "<group>"; };
 		9B285B39219A3F6100E2EB52 /* NodeAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NodeAnnotation.swift; sourceTree = "<group>"; };
 		9B44DCA7218E752900B1FFA1 /* NodeGen.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NodeGen.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B44DCAA218E752900B1FFA1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -82,6 +84,7 @@
 				9B44DCC9218E772600B1FFA1 /* Model */,
 				9B44DCAA218E752900B1FFA1 /* AppDelegate.swift */,
 				9B44DCAC218E752900B1FFA1 /* ViewController.swift */,
+				9B18B61D21B3630600F682F2 /* default.json */,
 				9B44DCC4218E772600B1FFA1 /* map.json */,
 				9B44DCAE218E752900B1FFA1 /* Main.storyboard */,
 				9B44DCB1218E752D00B1FFA1 /* Assets.xcassets */,
@@ -183,6 +186,7 @@
 				9B44DCF5218F965D00B1FFA1 /* busstop.png in Resources */,
 				9B44DCB5218E752D00B1FFA1 /* LaunchScreen.storyboard in Resources */,
 				9B44DCB2218E752D00B1FFA1 /* Assets.xcassets in Resources */,
+				9B18B61E21B3630600F682F2 /* default.json in Resources */,
 				9B44DCF4218F01DC00B1FFA1 /* map.json in Resources */,
 				9B44DCB0218E752900B1FFA1 /* Main.storyboard in Resources */,
 			);
